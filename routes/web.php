@@ -113,3 +113,11 @@ $total2 = $total - $cashback - $potongan;
             ---------------------------------------- <br>".
             "Total Pembayaran : " .$total2;
 });
+
+route::get('/siswa', function(){
+    
+    $data_siswa = ['allia', 'hana','regita','fauzan','abel'];
+
+    return view('tampil',compact('data_siswa'));
+
+});

@@ -1,6 +1,13 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\PostsController;
+use App\Http\Controllers\SiswasController;
+use App\Http\Controllers\ppdbsController;
+use App\Models\post;
+use App\Models\barang;
+use App\Models\ppdb;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -121,3 +128,33 @@ route::get('/siswa', function(){
     return view('tampil',compact('data_siswa'));
 
 });
+
+// routing dengan model 
+// route::get('/post', function(){
+
+//     $post = post::all();
+//     return view('tampil_post', compact('post'));
+// });
+
+// route::get('/barang', function(){
+
+//     $barang = barang::all();
+//     return view('tampil_barang', compact('barang'));
+// });
+
+// route::get('/barang', function(){
+
+//     // $barang = barang::where('merk','LIKE','%SAMSUNG')->get();
+//     $barang = barang::where('id',3)->get();
+//     return view('tampil_barang', compact('barang'));
+// });
+
+route::get('/post',[PostsController::class, "menampilkan"]);
+route::get('/barang',[PostsController::class, "menampilkan"]);
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Route::resource('siswa', SiswasController::class);
+
+Route::resource('ppdb', ppdbsController::class);

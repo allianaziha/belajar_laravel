@@ -8,7 +8,7 @@
                 <div class="card-header">Tambah Data Siswa</div>
 
                 <div class="card-body">
-                <form action="{{ route('ppdb.store')}}" method="post" enctype="multipart/form-data">
+                <form action="{{ route('siswa.store')}}" method="post" enctype="multipart/form-data">
                     @csrf
                     <div class="form-group mb-2">
                         <label class="form-label">Nis</label>
@@ -19,7 +19,7 @@
                         <input type="text" class="form-control" name="nama">
                     </div>
                     <div class="form-group mb-3">
-                        <label class="form-label">Jenis_Kelamin</label>
+                        <label class="form-label">Jenis Kelamin</label>
                         <input type="radio" class="form-check-input" name="jenis_kelamin" value="laki-laki"> laki-laki
                         <input type="radio" class="form-check-input" name="jenis_kelamin" value="perempuan"> perempuan
                     </div>
@@ -30,6 +30,10 @@
                             <option value="XI RPL 2">XI RPL 2</option>
                             <option value="XI RPL 3">XI RPL 3</option>
                         </select>
+                    </div>
+                    <div class="form-group mb-2">
+                        <label class="form-label">cover</label>
+                        <input type="file" class="form-control" name="cover">
                     </div>
                     <button type="submit" class="btn btn-primary">Save</button>
                 </form>

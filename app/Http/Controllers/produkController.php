@@ -3,23 +3,20 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Siswa;
+use App\Models\produk;
+use App\Models\kategori;
 
-class SiswasController extends Controller
+class produkController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
     public function index()
     {
-        $siswa = Siswa::all();
-        return view('siswa.index', compact('siswa'));
+        $produk = produk::all();
+        return view('produk.index', compact('produk'));
     }
 
     /**
@@ -29,8 +26,10 @@ class SiswasController extends Controller
      */
     public function create()
     {
-        return view('siswa.create');
+        $kategori = kategori::all();
+        return view('produk.create', compact('kategori'));
     }
+
     /**
      * Store a newly created resource in storage.
      *
@@ -39,21 +38,23 @@ class SiswasController extends Controller
      */
     public function store(Request $request)
     {
-        $siswa = new Siswa;
-        $siswa->nis              = $request->nis;
-        $siswa->nama             = $request->nama;
-        $siswa->jenis_kelamin    = $request->jenis_kelamin;
-        $siswa->kelas            = $request->kelas;
+        $produk = new produk;
+        $produk->nama_produk   = $request->nama_produk;
+        $produk->harga         = $request->harga;
+        $produk->stok          = $request->stok;
+        $produk->id_kategori   = $request->id_kategori;
 
         if ($request->hasFile('cover')) {
             $img = $request->file('cover');
             $name = rand(1000, 9999) . $img->getClientOriginalName();
-            $img->move('images/siswa', $name);
-            $siswa->cover = $name;
+            $img->move('images/produk', $name);
+            $produk->cover = $name;
         }
-        $siswa->save();
 
-        return redirect()->route('siswa.index')->with('success', 'data berhasil ditambahkan');
+        $produk->save();
+
+        return redirect()->route('produk.index')->with('success', 'data berhasil ditambahkan');
+
     }
 
     /**
@@ -64,8 +65,9 @@ class SiswasController extends Controller
      */
     public function show($id)
     {
-        $siswa = Siswa::FindOrFail($id);
-        return view('Siswa.show', compact('siswa'));
+        $produk = produk::FindOrFail($id);
+        $kategori = kategori::all();
+        return view('produk.show', compact('produk', 'kategori'));
     }
 
     /**
@@ -76,8 +78,9 @@ class SiswasController extends Controller
      */
     public function edit($id)
     {
-        $siswa = Siswa::FindOrFail($id);
-        return view('Siswa.edit', compact('siswa'));
+        $produk = produk::FindOrFail($id);
+        $kategori = kategori::all();
+        return view('produk.edit', compact('produk', 'kategori'));  
     }
 
     /**
@@ -89,23 +92,25 @@ class SiswasController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $siswa = Siswa::FindOrFail($id);
-        $siswa->nis              = $request->nis;
-        $siswa->nama             = $request->nama;
-        $siswa->jenis_kelamin    = $request->jenis_kelamin;
-        $siswa->kelas            = $request->kelas;
+        $produk = produk::FindOrFail($id);
+        $produk->nama_produk   = $request->nama_produk;
+        $produk->harga         = $request->harga;
+        $produk->stok          = $request->stok;
+        $produk->id_kategori   = $request->id_kategori;
+
         if ($request->hasFile('cover')) {
-            $siswa->deleteImage();
+            $produk->deleteImage();
             $img = $request->file('cover');
             $name = rand(1000, 9999) . $img->getClientOriginalName();
-            $img->move('images/siswa', $name);
-            $siswa->cover = $name;
-            
+            $img->move('images/produk', $name);
+            $produk->cover = $name;
         }
-        
-        $siswa->save();
 
-        return redirect()->route('siswa.index')->with('success', 'data berhasil ditambahkan');
+        $produk->save();
+
+        session()->flash('success', 'data berhasil dirubah');
+
+        return redirect()->route('produk.index');
     }
 
     /**
@@ -116,8 +121,8 @@ class SiswasController extends Controller
      */
     public function destroy($id)
     {
-        $siswa = Siswa::FindOrFail($id);
-        $siswa->delete();
-        return redirect()->route('siswa.index')->with('success', 'data berhasil dihapus');
+        $produk = produk::FindOrFail($id);
+        $produk->delete();
+        return redirect()->route('produk.index')->with('success', 'data berhasil dihapus');
     }
 }

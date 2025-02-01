@@ -20,17 +20,22 @@
                         <input type="text" class="form-control" name="nama" value="{{ $siswa->nama }}">
                     </div>
                     <div class="form-group mb-3">
-                        <label class="form-label">Jenis_Kelamin</label>
+                        <label class="form-label" value="{{ $siswa->jenis_kelamin }}">Jenis_Kelamin</label>
                         <input type="radio" class="form-check-input" name="jenis_kelamin" value="laki-laki"> laki-laki
                         <input type="radio" class="form-check-input" name="jenis_kelamin" value="perempuan"> perempuan
                     </div>
                     <div class="form-group mb-3">
-                        <label class="form-label">Kelas</label>
+                        <label class="form-label">Kelas</label>              
                         <select class="form-control" name="kelas">
                             <option value="XI RPL 1">XI RPL 1</option>
                             <option value="XI RPL 2">XI RPL 2</option>
                             <option value="XI RPL 3">XI RPL 3</option>
                         </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="">cover</label>
+                        <img src="{{ asset('/images/siswa/' . $siswa->cover) }}" width="100" alt="">
+                        <input type="file" class="form-control" name="cover" required>
                     </div>
                     <button type="submit" class="btn btn-primary">Save</button>
                 </form>

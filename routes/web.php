@@ -4,6 +4,30 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostsController;
 use App\Http\Controllers\SiswasController;
 use App\Http\Controllers\ppdbsController;
+use App\Http\Controllers\penggunasController;
+use App\Http\Controllers\TeleponController;
+use App\Http\Controllers\kategoriController;
+use App\Http\Controllers\produkController;
+use App\Http\Controllers\productController;
+use App\Http\Controllers\customerController;
+use App\Http\Controllers\orderController;
+use App\Http\Controllers\penerbitController;
+use App\Http\Controllers\genreController;
+use App\Http\Controllers\pembeliController;
+use App\Http\Controllers\bukuController;
+use App\Http\Controllers\transaksiController;
+use App\Models\transaksi;
+use App\Models\buku;
+use App\Models\pembeli;
+use App\Models\genre;
+use App\Models\penerbit;
+use App\Models\order;
+use App\Models\customer;
+use App\Models\product;
+use App\Models\produk;
+use App\Models\kategori;
+use App\Models\Telepon;
+use App\Models\pengguna;
 use App\Models\post;
 use App\Models\barang;
 use App\Models\ppdb;
@@ -158,3 +182,23 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::resource('siswa', SiswasController::class);
 
 Route::resource('ppdb', ppdbsController::class);
+
+Route::resource('pengguna', penggunasController::class);
+
+Route::resource('telepon', TeleponController::class);
+
+Route::resource('kategori', kategoriController::class);
+
+Route::resource('produk', produkController::class);
+
+Route::resource('product', productController::class);
+
+Route::resource('customer', customerController::class);
+
+Route::resource('order', orderController::class);
+
+Route::resource('penerbit', penerbitController::class);
+Route::resource('genre', genreController::class);
+Route::resource('pembeli', pembeliController::class);
+Route::resource('buku', bukuController::class);
+Route::resource('transaksi', transaksiController::class);

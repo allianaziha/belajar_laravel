@@ -3,45 +3,51 @@
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-md-8">
+        <div class="col-md-10">
             <div class="card">
-                <div class="card-header">Data Siswa</div>
+                <div class="card-header">BUKU</div>
 
                 <div class="card-body">
                 @if (session('success'))
                     <div class="alert alert-success alert-dismissible fade show" role="alert">
                         {{ session('success') }}
                         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                    </div>
+                    </div> 
                     @endif
-                    <a href="{{ route('siswa.create') }}" class="btn btn-primary">Add</a>
+                    <a href="{{ route('buku.create') }}" class="btn btn-primary">Add</a>
                 <table class="table">
                     <thead>
                         <tr>
                             <th scope="col">No</th>
-                            <th scope="col">Nis</th>
-                            <th scope="col">Nama</th>
-                            <th scope="col">Jenis kelamin</th>
-                            <th scope="col">kelas</th>
+                            <th scope="col">nama Buku</th>
+                            <th scope="col">Harga</th>
+                            <th scope="col">Stok</th>
+                            <th scope="col">Image</th>
+                            <th scope="col">Id penerbit</th>
+                            <th scope="col">tanggal terbit</th>
+                            <th scope="col">Id genre</th>
                             <th scope="col">Action</th>
                         </tr>
                     </thead>
                     <tbody>
                         @php $no = 1 ; @endphp
-                        @foreach ($siswa as $data)
+                        @foreach ($buku as $data)
                         <tr>
                             <th scope="row">{{ $no++ }}</th>
-                            <td>{{$data->nis}}</td>
-                            <td>{{$data->nama}}</td>
-                            <td>{{$data->jenis_kelamin}}</td>
-                            <td>{{$data->kelas}}</td>
-                            <td>
-                                <img src="{{ asset('images/siswa/'.$data->cover) }}" width="100">
+                            <td>{{$data->nama_buku}}</td>
+                            <td>{{$data->harga}}</td>
+                            <td>{{$data->stok}}</td>
+                           <td>
+                                <img src="{{ asset('images/buku/'.$data->image) }}" width="100">
                             </td>
+                            <td>{{$data->penerbit->nama_penerbit}}</td>
+                            <td>{{$data->tanggal_terbit}}</td>
+                            <td>{{$data->genre->genre}}</td>
+                            
                             <td>
-                                <a href="{{ route('siswa.edit', $data->id) }}" class="btn btn-success">Edit</a>
-                                <a href="{{ route('siswa.show', $data->id) }}" class="btn btn-warning">Show</a>
-                                <form action="{{ route('siswa.destroy', $data->id) }}" method="POST" style="display:inline">
+                                <a href="{{ route('buku.edit', $data->id) }}" class="btn btn-success">Edit</a>
+                                <a href="{{ route('buku.show', $data->id) }}" class="btn btn-warning">Show</a>
+                                <form action="{{ route('buku.destroy', $data->id) }}" method="POST" style="display:inline">
                                     @csrf
                                     @method('DELETE')
                                     <button type="submit" class="btn btn-danger " onClick="return confirm('apakah anda yakin') ">Delete</button>
